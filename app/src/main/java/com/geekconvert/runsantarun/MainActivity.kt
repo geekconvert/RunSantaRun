@@ -27,12 +27,15 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         mediaPlayer = MediaPlayer.create(this, R.raw.bg_music)
         mediaPlayer?.let {
             it.isLooping = true
             it.start()
         }
+
         AppConstants.initialization(this.applicationContext)
+
         ibStaruButton = findViewById(R.id.ibStartGame)
         ibStaruButton?.setOnClickListener {
             val intent = Intent(this@MainActivity, GameActivity::class.java)

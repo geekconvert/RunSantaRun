@@ -8,13 +8,15 @@ object AppConstants {
 
     lateinit var bitmapBank: BitmapBank
     lateinit var gameEngine: GameEngine
+
     var SCREEN_WIDTH: Int = 0
     var SCREEN_HEIGHT: Int = 0
     var gravity: Int = 0
     var VELOCITY_WHEN_JUMPED: Int = 0
     var VELOCITY_OBSTACLES: Int = 0
-    lateinit var gameActivityContext: Context
     var playerGrounded: Boolean = true
+
+    lateinit var gameActivityContext: Context
 
     fun initialization(context: Context) {
         setScreenSize(context)
@@ -36,7 +38,7 @@ object AppConstants {
     private fun setGameConstants() {
         gravity = 3
         VELOCITY_WHEN_JUMPED = -40
-        VELOCITY_OBSTACLES = 45
+        VELOCITY_OBSTACLES = 20
         playerGrounded = true
     }
 
