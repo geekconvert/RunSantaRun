@@ -1,9 +1,11 @@
-package com.geekconvert.runsantarun
+package com.geekconvert.runsantarun.gameobjects
 
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.core.graphics.scale
+import com.geekconvert.runsantarun.AppConstants
+import com.geekconvert.runsantarun.R
 
 class BitmapBank(res: Resources, packageName: String) {
 
@@ -29,12 +31,13 @@ class BitmapBank(res: Resources, packageName: String) {
         setupPlayerJumpBitmaps(res)
         setupPlayerDeadBitmaps(res)
 
-        box = BitmapFactory.decodeResource(res, R.drawable.box);
-        crystal = BitmapFactory.decodeResource(res, R.drawable.crystal);
-        iceBox = BitmapFactory.decodeResource(res, R.drawable.icebox);
-        snowMan = BitmapFactory.decodeResource(res, R.drawable.snowman);
-        stone = BitmapFactory.decodeResource(res, R.drawable.stone);
-        tapToStart = BitmapFactory.decodeResource(res, R.drawable.tap_to_start);
+        box = BitmapFactory.decodeResource(res, R.drawable.box)
+        crystal = BitmapFactory.decodeResource(res, R.drawable.crystal)
+        iceBox = BitmapFactory.decodeResource(res, R.drawable.icebox)
+        snowMan = BitmapFactory.decodeResource(res, R.drawable.snowman)
+        stone = BitmapFactory.decodeResource(res, R.drawable.stone)
+
+        tapToStart = BitmapFactory.decodeResource(res, R.drawable.tap_to_start)
     }
 
     fun setupPlayerBitmaps(res: Resources){
@@ -97,28 +100,28 @@ class BitmapBank(res: Resources, packageName: String) {
 
     // Return player width
     fun getPlayerWidth(): Int {
-        return player[0]!!.getWidth()
+        return player[0].getWidth()
     }
 
     // Return player height
     fun getPlayerHeight(): Int {
-        return player[0]!!.getHeight()
+        return player[0].getHeight()
     }
 
 
     // Return player dead bitmap
     fun getPlayerDead(pDFrame: Int): Bitmap {
-        return playerDead[pDFrame]!!
+        return playerDead[pDFrame]
     }
 
     // Return player dead width
     fun getPlayerDeadWidth(): Int {
-        return playerDead[0]!!.getWidth()
+        return playerDead[0].getWidth()
     }
 
     // Return player dead height
     fun getPlayerDeadHeight(): Int {
-        return playerDead[0]!!.getHeight()
+        return playerDead[0].getHeight()
     }
 
     // Return Box width

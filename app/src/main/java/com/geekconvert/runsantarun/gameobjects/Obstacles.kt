@@ -1,6 +1,6 @@
-package com.geekconvert.runsantarun
+package com.geekconvert.runsantarun.gameobjects
 
-import android.graphics.Canvas
+import com.geekconvert.runsantarun.AppConstants
 import java.util.Random
 
 class Obstacles {

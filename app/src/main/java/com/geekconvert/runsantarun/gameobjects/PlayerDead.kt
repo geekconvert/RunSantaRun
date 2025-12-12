@@ -1,4 +1,6 @@
-package com.geekconvert.runsantarun
+package com.geekconvert.runsantarun.gameobjects
+
+import com.geekconvert.runsantarun.AppConstants
 
 class PlayerDead : Player {
 

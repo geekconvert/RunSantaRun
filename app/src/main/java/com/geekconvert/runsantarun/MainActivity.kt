@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             it.start()
         }
 
-        AppConstants.initialization(this.applicationContext)
+        AppConstants.initialization(this)
 
         ibStaruButton = findViewById(R.id.ibStartGame)
         ibStaruButton?.setOnClickListener {

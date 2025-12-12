@@ -5,6 +5,8 @@ import android.media.MediaPlayer
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import com.geekconvert.runsantarun.gameobjects.GameEngine
+import com.geekconvert.runsantarun.gameobjects.GameThread
 
 class GameView(context: Context): SurfaceView(context), SurfaceHolder.Callback {
 

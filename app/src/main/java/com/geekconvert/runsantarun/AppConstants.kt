@@ -1,8 +1,11 @@
 package com.geekconvert.runsantarun
 
+import android.app.Application
 import android.content.Context
 import android.util.DisplayMetrics
 import android.view.WindowManager
+import com.geekconvert.runsantarun.gameobjects.BitmapBank
+import com.geekconvert.runsantarun.gameobjects.GameEngine
 
 object AppConstants {
 

@@ -1,4 +1,4 @@
-package com.geekconvert.runsantarun
+package com.geekconvert.runsantarun.gameobjects
 
 class BackgroundImage {
 

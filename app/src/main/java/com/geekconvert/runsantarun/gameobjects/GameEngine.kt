@@ -1,4 +1,4 @@
-package com.geekconvert.runsantarun
+package com.geekconvert.runsantarun.gameobjects
 
 import android.app.Activity
 import android.content.Intent
@@ -7,13 +7,16 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.media.MediaPlayer
+import com.geekconvert.runsantarun.AppConstants
+import com.geekconvert.runsantarun.GameOver
+import com.geekconvert.runsantarun.R
 import java.util.Random
 
 
 class GameEngine {
 
     companion object {
-        var gameState: Int = 0
+        var gameState: Int = 0 // 0 = Not started  1 = Playing  2 = GameOver
     }
 
     var backgroundImage: BackgroundImage = BackgroundImage()
@@ -33,7 +36,6 @@ class GameEngine {
     var obstacles3: Obstacles = Obstacles("IceBox")
     var obstacles4: Obstacles = Obstacles("Snowman")
     var obstacles5: Obstacles = Obstacles("Stone")
-    var obs: Bitmap? = null
     var obsSpawned: Boolean = false
     var points: Int = 0
     val TEXT_SIZE: Int = 80
@@ -42,25 +44,26 @@ class GameEngine {
     var hitSound: Boolean = false
 
     constructor() {
-        // 0 = Not started
-        // 1 = Playing
-        // 2 = GameOver
         gameState = 0;
         obsSpawned = false
         pFrame = 0
         pJFrame = 0
         pDFrame = 0
         score = 0
-        scorePaint.setColor(Color.RED)
-        scorePaint.setTextSize(TEXT_SIZE.toFloat())
-        scorePaint.setTextAlign(Paint.Align.LEFT)
+
         obstaclesList.add(obstacles1)
         obstaclesList.add(obstacles2)
         obstaclesList.add(obstacles3)
         obstaclesList.add(obstacles4)
         obstaclesList.add(obstacles5)
+
         points = 0;
         hitSound = false;
+
+        scorePaint.color = Color.RED
+        scorePaint.textSize = TEXT_SIZE.toFloat()
+        scorePaint.textAlign = Paint.Align.LEFT
+
         hit = MediaPlayer.create(AppConstants.gameActivityContext, R.raw.hit);
     }
 
@@ -132,12 +135,6 @@ class GameEngine {
                     hit.start();
                     hitSound = true;
                 }
-            }else if (!collision && AppConstants.playerGrounded) {
-                canvas.drawBitmap(AppConstants.bitmapBank.player[pFrame], player.pX.toFloat(), player.pY.toFloat(), null);
-                pFrame++;
-                if (pFrame > 10) {
-                    pFrame = 0;
-                }
             }else if (collision && AppConstants.playerGrounded) {
                 canvas.drawBitmap(AppConstants.bitmapBank.getPlayerDead(pDFrame), playerDead.pX.toFloat(), playerDead.pY.toFloat(), null);
                 pDFrame++;
@@ -152,6 +149,12 @@ class GameEngine {
                 if(!hitSound) {
                     hit.start();
                     hitSound = true;
+                }
+            }else if (!collision && AppConstants.playerGrounded) {
+                canvas.drawBitmap(AppConstants.bitmapBank.player[pFrame], player.pX.toFloat(), player.pY.toFloat(), null);
+                pFrame++;
+                if (pFrame > 10) {
+                    pFrame = 0;
                 }
             }
             if (obstacles.cX <= player.pX + AppConstants.bitmapBank.getPlayerWidth() && obstacles.cX + obstacles.width >= player.pX
@@ -173,22 +176,25 @@ class GameEngine {
             }
             if (!collision) {
                 obstacles.cX -= obstacles.velocity;
+                var obs: Bitmap? = null
                 if (obstacles.type =="Box") {
-                    obs = AppConstants.bitmapBank.box;
+                    obs = AppConstants.bitmapBank.box
                 }
                 if (obstacles.type =="Crystal") {
-                    obs = AppConstants.bitmapBank.crystal;
+                    obs = AppConstants.bitmapBank.crystal
                 }
                 if (obstacles.type =="IceBox") {
-                    obs = AppConstants.bitmapBank.iceBox;
+                    obs = AppConstants.bitmapBank.iceBox
                 }
                 if (obstacles.type =="Snowman") {
-                    obs = AppConstants.bitmapBank.snowMan;
+                    obs = AppConstants.bitmapBank.snowMan
                 }
                 if (obstacles.type =="Stone") {
-                    obs = AppConstants.bitmapBank.stone;
+                    obs = AppConstants.bitmapBank.stone
                 }
-                obs?.let { canvas.drawBitmap(it, obstacles.cX.toFloat(), obstacles.cY.toFloat(), null) };
+                obs?.let {
+                    canvas.drawBitmap(it, obstacles.cX.toFloat(), obstacles.cY.toFloat(), null)
+                }
                 if (obstacles.cX <= -AppConstants.bitmapBank.getBoxWidth()) {
                     obstacles.reset();
                     points++;

@@ -1,7 +1,8 @@
-package com.geekconvert.runsantarun
+package com.geekconvert.runsantarun.gameobjects
 
 import android.util.Log
 import android.view.SurfaceHolder
+import com.geekconvert.runsantarun.AppConstants
 
 
 class GameThread(val surfaceHolder: SurfaceHolder) : Thread() {
@@ -37,7 +38,7 @@ class GameThread(val surfaceHolder: SurfaceHolder) : Thread() {
             // Pause here to make sure we update the right amount per second
             if(loopTime < DELAY){
                 try {
-                    Thread.sleep(DELAY - loopTime)
+                    sleep(DELAY - loopTime)
                 } catch (e: InterruptedException) {
                     Log.e("Interrupted", "Interrupted while sleeping")
                 }
